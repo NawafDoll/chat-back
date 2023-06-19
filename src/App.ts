@@ -40,10 +40,6 @@ app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "my-app", "build", "index.html"));
 });
 
-app.get("*", (request, res) => {
-  res.sendFile(path.join(__dirname, "uploads/"));
-});
-
 const server = app.listen(process.env.PORT || 4436, () =>
   console.log("Server Running")
 );

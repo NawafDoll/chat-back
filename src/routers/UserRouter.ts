@@ -21,12 +21,7 @@ import { Upload } from "../middleware/upload";
 
 const userRouter = express.Router();
 
-userRouter.post(
-  "/register",
-  Upload.single("pic"),
-  validate(registerZodSchema),
-  register
-);
+userRouter.post("/register", validate(registerZodSchema), register);
 userRouter.post("/login", validate(loginZodSchema), login);
 userRouter.post("/resetpass", validate(resetPassZodSchema), resetPass);
 userRouter.post("/editpass/:id/:token", validate(editPassZodSchema), editPass);

@@ -3,9 +3,11 @@ import { user } from "../module/UsersModule";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
+import { cloudinary } from "../middleware/Claudinary";
 export const register = async (req: Request, res: Response) => {
   try {
-    const { file } = req;
+    const { pic } = req.body;
+
     const findUserByEmail = await user.findOne({ email: req.body.email });
     const findUserByPhone = await user.findOne({ phone: req.body.phone });
     if (findUserByEmail || findUserByPhone)
@@ -20,12 +22,18 @@ export const register = async (req: Request, res: Response) => {
         .status(400)
         .json({ message: "هذا الاسم مستخدم من قبل مستخدم اخر" });
     const hashPass = await bcrypt.hash(req.body.password, 10);
+    const result: any = await cloudinary.v2.uploader.upload(pic, {
+      folder: "products",
+    });
     const newUser = await user.create({
       username: req.body.username,
       email: req.body.email,
       phone: req.body.phone,
       password: hashPass,
-      pic: file?.path,
+      pic: {
+        public_id: result.public_id,
+        url: result.secure_url,
+      },
     });
 
     if (newUser) return res.status(200).json({ message: "Create Account" });

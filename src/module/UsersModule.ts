@@ -7,7 +7,10 @@ const userSchema = new Schema(
     phone: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     rePassword: { type: String, required: false },
-    pic: { type: String, required: false },
+    pic: {
+      public_id: { type: String },
+      url: { type: String },
+    },
   },
   {
     timestamps: true,

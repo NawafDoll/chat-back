@@ -17,9 +17,10 @@ const UsersModule_1 = require("../module/UsersModule");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const nodemailer_1 = __importDefault(require("nodemailer"));
+const Claudinary_1 = require("../middleware/Claudinary");
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { file } = req;
+        const { pic } = req.body;
         const findUserByEmail = yield UsersModule_1.user.findOne({ email: req.body.email });
         const findUserByPhone = yield UsersModule_1.user.findOne({ phone: req.body.phone });
         if (findUserByEmail || findUserByPhone)
@@ -34,12 +35,18 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 .status(400)
                 .json({ message: "هذا الاسم مستخدم من قبل مستخدم اخر" });
         const hashPass = yield bcrypt_1.default.hash(req.body.password, 10);
+        const result = yield Claudinary_1.cloudinary.v2.uploader.upload(pic, {
+            folder: "products",
+        });
         const newUser = yield UsersModule_1.user.create({
             username: req.body.username,
             email: req.body.email,
             phone: req.body.phone,
             password: hashPass,
-            pic: file === null || file === void 0 ? void 0 : file.path,
+            pic: {
+                public_id: result.public_id,
+                url: result.secure_url,
+            },
         });
         if (newUser)
             return res.status(200).json({ message: "Create Account" });
