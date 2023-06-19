@@ -37,6 +37,9 @@ app.use(express_1.default.static(path_1.default.join(__dirname, "/my-app/build")
 app.get("*", (req, res) => {
     res.sendFile(path_1.default.resolve(__dirname, "my-app", "build", "index.html"));
 });
+app.get("*", (request, res) => {
+    res.sendFile(path_1.default.join(__dirname, "uploads/"));
+});
 const server = app.listen(process.env.PORT || 4436, () => console.log("Server Running"));
 const io = new socket_io_1.Server(server, {
     cors: {
