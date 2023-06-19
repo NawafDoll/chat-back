@@ -38,17 +38,17 @@ connectDB();
 //   next();
 // });
 
-const dirname = path.resolve();
-app.use(express.static(path.join(__dirname, "/my-app/build")));
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "my-app", "build", "index.html"));
-});
-
 app.use("/user", userRouter);
 app.use("/chat", chatRouter);
 app.use("/message", messageRouter);
 
 // const server = http.createServer(app);
+
+const dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "/my-app/build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "my-app", "build", "index.html"));
+});
 
 const server = app.listen(process.env.PORT || 4436, () =>
   console.log("Server Running")

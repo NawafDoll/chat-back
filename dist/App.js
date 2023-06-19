@@ -37,15 +37,15 @@ app.use("/uploads", express_1.default.static("uploads"));
 //   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 //   next();
 // });
+app.use("/user", UserRouter_1.userRouter);
+app.use("/chat", ChatRouter_1.chatRouter);
+app.use("/message", MessageRouter_1.messageRouter);
+// const server = http.createServer(app);
 const dirname = path_1.default.resolve();
 app.use(express_1.default.static(path_1.default.join(__dirname, "/my-app/build")));
 app.get("*", (req, res) => {
     res.sendFile(path_1.default.resolve(__dirname, "my-app", "build", "index.html"));
 });
-app.use("/user", UserRouter_1.userRouter);
-app.use("/chat", ChatRouter_1.chatRouter);
-app.use("/message", MessageRouter_1.messageRouter);
-// const server = http.createServer(app);
 const server = app.listen(process.env.PORT || 4436, () => console.log("Server Running"));
 const io = new socket_io_1.Server(server, {
     cors: {
