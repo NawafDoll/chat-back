@@ -28,15 +28,6 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use("/uploads", express_1.default.static("uploads"));
 (0, DB_1.connectDB)();
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "https://chay.onrender.com");
-//   res.setHeader(
-//     "Access-Control-Allow-Methods",
-//     "OPTIONS, GET, POST, PUT, PATCH, DELETE"
-//   );
-//   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-//   next();
-// });
 app.use("/user", UserRouter_1.userRouter);
 app.use("/chat", ChatRouter_1.chatRouter);
 app.use("/message", MessageRouter_1.messageRouter);
