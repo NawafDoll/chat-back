@@ -62,7 +62,8 @@ io.on("connection", (socket) => {
     socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
     socket.on("new message", (newMessageRecieved) => {
         var chat = newMessageRecieved.chat;
-        // if (!chat.users) return console.log("chat.users are not defined");
+        if (!chat.users)
+            return console.log("chat.users are not defined");
         chat.users.forEach((u) => {
             if (u._id === newMessageRecieved.sender)
                 return;
