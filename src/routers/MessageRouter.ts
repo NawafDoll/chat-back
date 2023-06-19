@@ -10,7 +10,7 @@ import { Upload } from "../middleware/upload";
 const messageRouter = express.Router();
 
 messageRouter.post("/", protect, sendMessage);
-messageRouter.post("/sendfile", protect, Upload.single("image"), sendfile);
+messageRouter.post("/sendfile", protect, sendfile);
 messageRouter.get("/:chatId", protect, allMessages);
 // messageRouter.post("/uploadfiles",protect ,)
 
