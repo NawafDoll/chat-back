@@ -58,6 +58,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.register = register;
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
         const email = req.body.email;
         const password = req.body.password;
@@ -78,7 +79,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             id: checkEmail.id,
             username: checkEmail.username,
             email: checkEmail.email,
-            pic: checkEmail.pic,
+            pic: (_a = checkEmail.pic) === null || _a === void 0 ? void 0 : _a.url,
         });
     }
     catch (err) {

@@ -68,7 +68,7 @@ export const login = async (req: Request, res: Response) => {
       id: checkEmail.id,
       username: checkEmail.username,
       email: checkEmail.email,
-      pic: checkEmail.pic,
+      pic: checkEmail.pic?.url,
     });
   } catch (err) {
     console.log(err);
