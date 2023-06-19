@@ -12,7 +12,7 @@ const app = express();
 dotenv.config();
 app.use(
   cors({
-    origin: "https://chay.onrender.com",
+    origin: "https://chat-axjv.onrender.com",
     methods: [
       "Access-Control-Allow-Methods",
       "GET, POST, OPTIONS, PUT, DELETE",
@@ -28,15 +28,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static("uploads"));
 connectDB();
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://chay.onrender.com");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "OPTIONS, GET, POST, PUT, PATCH, DELETE"
-  );
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "https://chay.onrender.com");
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+//   );
+//   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//   next();
+// });
 
 const dirname = path.resolve();
 app.use(express.static(path.join(__dirname, "../../my-app/build")));
@@ -56,7 +56,7 @@ const server = app.listen(process.env.PORT || 4436, () =>
 
 const io = new Server(server, {
   cors: {
-    origin: "https://chay.onrender.com",
+    origin: "https://chat-axjv.onrender.com",
     methods: [
       "Access-Control-Allow-Methods",
       "GET, POST, OPTIONS, PUT, DELETE",
