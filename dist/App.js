@@ -38,9 +38,9 @@ app.use("/uploads", express_1.default.static("uploads"));
 //   next();
 // });
 const dirname = path_1.default.resolve();
-app.use(express_1.default.static(path_1.default.join(__dirname, "../../my-app/build")));
+app.use(express_1.default.static(path_1.default.join(__dirname, "/my-app/build")));
 app.get("*", (req, res) => {
-    res.sendFile(path_1.default.resolve(__dirname, "../../my-app/build/index.html"));
+    res.sendFile(path_1.default.resolve(__dirname, "my-app", "build", "index.html"));
 });
 app.use("/user", UserRouter_1.userRouter);
 app.use("/chat", ChatRouter_1.chatRouter);
