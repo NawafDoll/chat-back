@@ -17,6 +17,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const MessageModel_1 = require("../module/MessageModel");
 const UsersModule_1 = require("../module/UsersModule");
 const ChatModel_1 = require("../module/ChatModel");
+const Claudinary_1 = require("../middleware/Claudinary");
 const sendMessage = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { content, chatId } = req.body;
@@ -53,7 +54,7 @@ exports.sendMessage = sendMessage;
 const sendfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { content, chatId } = req.body;
-        const { file } = req;
+        const { image } = req.body;
         let token = req.headers.authorization;
         token = token.split(" ")[1];
         const user_id = jsonwebtoken_1.default.decode(token);
@@ -62,11 +63,17 @@ const sendfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         //     .status(400)
         //     .json({ message: "Invalid data passed into requist" });
         // }
+        const result = yield Claudinary_1.cloudinary.v2.uploader.upload(image, {
+            folder: "products",
+        });
         var newMessage = {
             sender: user_id.id,
             content: "imagefromUploads",
             chat: chatId,
-            image: file === null || file === void 0 ? void 0 : file.path,
+            image: {
+                public_id: result.public_id,
+                url: result.secure_url,
+            },
         };
         var message = yield MessageModel_1.Message.create(newMessage);
         message = yield message.populate("sender", "username pic email ");

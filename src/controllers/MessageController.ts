@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import { Message } from "../module/MessageModel";
 import { user } from "../module/UsersModule";
 import { chat } from "../module/ChatModel";
+import { cloudinary } from "../middleware/Claudinary";
 
 export const sendMessage = async (req: Request, res: Response) => {
   try {
@@ -41,7 +42,7 @@ export const sendMessage = async (req: Request, res: Response) => {
 export const sendfile = async (req: Request, res: Response) => {
   try {
     const { content, chatId }: any = req.body;
-    const { file } = req;
+    const { image } = req.body;
     let token: any = req.headers.authorization;
     token = token.split(" ")[1];
     const user_id: any = jwt.decode(token);
@@ -51,12 +52,17 @@ export const sendfile = async (req: Request, res: Response) => {
     //     .status(400)
     //     .json({ message: "Invalid data passed into requist" });
     // }
-
+    const result: any = await cloudinary.v2.uploader.upload(image, {
+      folder: "products",
+    });
     var newMessage: any = {
       sender: user_id.id,
       content: "imagefromUploads",
       chat: chatId,
-      image: file?.path,
+      image: {
+        public_id: result.public_id,
+        url: result.secure_url,
+      },
     };
     var message: any = await Message.create(newMessage);
     message = await message.populate("sender", "username pic email ");

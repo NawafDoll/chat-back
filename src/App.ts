@@ -20,7 +20,7 @@ app.use(
     credentials: true,
   })
 );
-app.use(express.json());
+app.use(express.json({ limit: "100mb" }));
 // const port = ;
 // const server = http.createServer(app);
 

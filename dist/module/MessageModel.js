@@ -29,7 +29,10 @@ const messageSchema = new mongoose_1.Schema({
     sender: { type: mongoose_1.default.Schema.Types.ObjectId, ref: "user" },
     content: { type: String, trim: true },
     chat: { type: mongoose_1.default.Schema.Types.ObjectId, ref: "chat" },
-    image: { type: String, required: false },
+    image: {
+        public_id: { type: String },
+        url: { type: String },
+    },
 }, {
     timestamps: true,
 });
