@@ -18,11 +18,10 @@ var storage = multer_1.default.diskStorage({
 var Upload = (0, multer_1.default)({
     storage: storage,
     fileFilter: function (req, file, callback) {
-        if (
-        // file.mimetype === "image/png" ||
-        // file.mimetype === "image/jpg" ||
-        // file.mimetype === "image/jpeg" ||
-        file.mimetype === "application/pdf" ||
+        if (file.mimetype === "image/png" ||
+            file.mimetype === "image/jpg" ||
+            file.mimetype === "image/jpeg" ||
+            file.mimetype === "application/pdf" ||
             file.mimetype === "video/mp4" ||
             file.mimetype === "video/mp3" ||
             file.mimetype === "video/360p") {
