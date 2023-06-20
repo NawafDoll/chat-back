@@ -38,10 +38,7 @@ const dirname = path.resolve();
 app.use(express.static(path.join(__dirname, "/my-app/build")));
 app.get("*", (req, res) => {
   res.sendFile(
-    path.resolve(
-      __dirname,
-      "/opt/render/project/src/dist/my-app/build/index.html"
-    )
+    path.resolve(__dirname, "../dist../../../my-app/build/index.html")
   );
 });
 

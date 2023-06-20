@@ -35,7 +35,7 @@ app.use("/message", MessageRouter_1.messageRouter);
 const dirname = path_1.default.resolve();
 app.use(express_1.default.static(path_1.default.join(__dirname, "/my-app/build")));
 app.get("*", (req, res) => {
-    res.sendFile(path_1.default.resolve(__dirname, "/opt/render/project/src/dist/my-app/build/index.html"));
+    res.sendFile(path_1.default.resolve(__dirname, "../dist../../../my-app/build/index.html"));
 });
 const server = app.listen(process.env.PORT || 4436, () => console.log("Server Running"));
 const io = new socket_io_1.Server(server, {
