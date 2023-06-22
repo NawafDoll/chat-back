@@ -65,7 +65,7 @@ const sendfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // }
         const result = yield Claudinary_1.cloudinary.v2.uploader.upload(image, {
             folder: "products",
-            format: "pdf",
+            allowed_formats: ["pdf", "png", "jpg", "mp4"],
             transformation: {
                 width: 400,
                 Height: 600,

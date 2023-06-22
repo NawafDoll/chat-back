@@ -54,7 +54,7 @@ export const sendfile = async (req: Request, res: Response) => {
     // }
     const result: any = await cloudinary.v2.uploader.upload(image, {
       folder: "products",
-      format: "pdf",
+      allowed_formats: ["pdf", "png", "jpg", "mp4"],
       transformation: {
         width: 400,
         Height: 600,
