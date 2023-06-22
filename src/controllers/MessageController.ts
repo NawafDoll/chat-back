@@ -54,7 +54,7 @@ export const sendfile = async (req: Request, res: Response) => {
     // }
     const result: any = await cloudinary.v2.uploader.upload(image, {
       folder: "products",
-      format: "auto",
+      format: "pdf",
     });
     var newMessage: any = {
       sender: user_id.id,
