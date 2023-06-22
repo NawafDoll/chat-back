@@ -66,6 +66,11 @@ const sendfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const result = yield Claudinary_1.cloudinary.v2.uploader.upload(image, {
             folder: "products",
             format: "pdf",
+            transformation: {
+                width: 400,
+                Height: 600,
+                crop: "limit",
+            },
         });
         var newMessage = {
             sender: user_id.id,
